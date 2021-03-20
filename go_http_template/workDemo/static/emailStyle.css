@@ -1,0 +1,47 @@
+.outer {
+    width: 650px;
+    background-color: rgb(248, 247, 245);
+    margin: 0 auto;
+    border: 1px solid ;
+    border-radius: 5px;
+
+}
+.header {
+    text-align: center;
+    height: 100px;
+    border: 1px solid ;
+    border-radius: 5px 5px 0 0;
+    background-color: #09162d;
+    margin: 0; 
+}
+.header img {
+    display: block;
+    margin: 20px auto ;
+}
+.content {
+    width: 550px;
+    margin: 0 auto;
+    font-family: "微软雅黑", Geneva, Tahoma, sans-serif;
+}
+h3 {
+    margin: 0;
+    padding: 30px 0 0 0 ;
+}
+.hintText {
+   margin-bottom: 0; 
+}
+.guideText {
+    margin: 25px 0 0 0;
+}
+.inscribe {
+    display: block;
+    text-align: right;
+    margin: 60px 0 0 0;
+}
+.bottom {
+    height: 20px;
+    margin: 50px 0 0 0;
+    padding-bottom: 20px;
+    opacity: 0.5;
+    font-size: small;
+}
