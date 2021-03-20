@@ -19,6 +19,14 @@ func main() {
 	f1 := Friend{Fname: "minux.ma"}
 	f2 := Friend{Fname: "xushiwei"}
 	t := template.New("fieldname example")
+	// t, _ = t.Parse(`hello {{.UserName}}!
+	// 		{{range .Emails}}
+	// 			an email {{.}}
+	// 		{{end}}
+	// 		{{range .Friends}}
+	// 			my friend name is {{.Fname}}
+	// 		{{end}}
+	// 		`)
 	t, _ = t.Parse(`hello {{.UserName}}!
 			{{range .Emails}}
 				an email {{.}}
