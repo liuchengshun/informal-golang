@@ -11,7 +11,7 @@ type User struct {
 	Age     int       `validate:"required,min=18,max=80"`
 	Phone   string    `validate:"len=11"`
 	Hobby   []string  `validate:"required,gt=0,lte=3"`
-	Company string    `validate:"oneof= tongfang youyun"`
+	Company string    `validate:"oneof=tongfang youyun"`
 }
 
 func main() {
