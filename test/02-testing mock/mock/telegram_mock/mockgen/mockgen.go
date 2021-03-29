@@ -2,7 +2,7 @@
 // Source: ./interface/interface.go
 
 // Package mockgen is a generated GoMock package.
-package mockgen
+package mock
 
 import (
 	reflect "reflect"

@@ -1,0 +1,1 @@
+# this Demo realized goroutine of sync
