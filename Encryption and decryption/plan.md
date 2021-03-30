@@ -15,7 +15,11 @@
 
 1. 创建一个结构体，结构体包含所需要的全部信息 （crypticBody）
 
-2. 给结构体写入编码和解码的方法，编码和解码使用aes对称加密算法
+2. 使用标准包 "crypto/aes" 和 "crypto/cipher" ，aes进行加密
+
+3. 加密模式为CFB
+
+4. 给结构体写入编码和解码的方法，编码和解码使用aes对称加密算法
 ***
 
 ## 实现细则
@@ -24,19 +28,19 @@
 
 **明文：**
 
-1. 用户注册的时候输入的密码     (password)
+1. 用户注册的时候输入的密码 string 类型   (password)
 
-2. admin token                (adminToken)
+2. admin token 类型为string               (adminToken)
 
-3. 用户登录之后，用户的token    (userToken)
+3. 用户登录之后，用户的token 类型为 string   (userToken)
 
 **密文：**
 
-1. 用户的注册密码的密文 (passwordEpt)
+1. 用户的注册密码的密文 类型为[]byte (passwordEpt)
 
-2. admin token 的密文 (adminTokenEpt)
+2. admin token 的密文 类型为[]byte (adminTokenEpt)
 
-3. 用户登录后的token密文 (userTokenEpt)
+3. 用户登录后的token密文 类型为[]byte (userTokenEpt)
 
 **加解密使用到的参数：（可以在初始化的时候就进行赋值）**
 
@@ -66,9 +70,9 @@
 
 1. 运行这个函数可以将任意字符串进行加密
 
-2. 参数值为明文字符串
+2. 参数值为明文字符串 (plainText)
 
-3. 返回值为密文字符串
+3. 返回值为密文字符串 (cipherText)
 
 **解密函数**
 
