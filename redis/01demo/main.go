@@ -4,6 +4,14 @@ import (
 	"context"
 	"fmt"
 
+	"log"
+	"io"
+
+	"crypto/aes"
+	"crypto/cipher"
+	"crypto/rand"
+	"encoding/hex"
+
 	redisV8 "github.com/go-redis/redis/v8"
 )
 
@@ -14,8 +22,6 @@ type redisHook struct {
 var _ redisV8.Hook = redisHook{}
 
 func main() {
-	fmt.Println("key:", key)
-
 	client := redisV8.NewClient(&redisV8.Options{
 		Addr:     "localhost:6379", // redis地址
 	})
@@ -40,9 +46,9 @@ func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.
 		fmt.Println("beforeProcess is running")
 		args := cmd.Args()
 		fmt.Println("args[2]:", args[2])
-		// if val, ok := args[2].(string); ok {
-		// 	args[2] = AesEncryptCFB(val)
-		// }
+		if val, ok := args[2].(string); ok {
+			args[2] = aesEncryptCFB(val)
+		}
 	}
 	return ctx, nil
 }
@@ -55,4 +61,26 @@ func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
 	// fmt.Println("Args():", cmd.Args())
 	// fmt.Println("String:", cmd.String())
 	return nil
+}
+
+var Key = []byte("0123456789ABCDEF")
+
+func aesEncryptCFB(plainText string) (cipherStr string) {
+	plainBytes := []byte(plainText)
+	block, err := aes.NewCipher(Key)
+	if err != nil {
+		log.Fatal("create instance of encryption error:", err)
+		return
+	}
+
+	cipherBytes := make([]byte, aes.BlockSize+len(plainBytes))
+	iv := cipherBytes[:aes.BlockSize]
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		log.Fatal("generate random iv error:", err)
+		return
+	}
+
+	stream := cipher.NewCFBEncrypter(block, iv)
+	stream.XORKeyStream(cipherBytes[aes.BlockSize:], plainBytes)
+	return hex.EncodeToString(cipherBytes)
 }
