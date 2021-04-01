@@ -6,6 +6,8 @@ require (
 	bou.ke/monkey v1.0.2
 	github.com/agiledragon/gomonkey v2.0.2+incompatible
 	github.com/go-playground/validator/v10 v10.4.1
+	github.com/go-redis/redis v6.15.9+incompatible
+	github.com/go-redis/redis/v8 v8.8.0
 	github.com/golang/mock v1.5.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/smartystreets/goconvey v1.6.4

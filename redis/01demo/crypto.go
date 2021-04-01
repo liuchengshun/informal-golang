@@ -47,12 +47,3 @@ func AesDecryptCFB(cipherStr string) (plainText string) {
 	stream.XORKeyStream(plainBytes, plainBytes)
 	return string(plainBytes)
 }
-
-func main() {
-	plainText := "Hello World"
-	cipherStr := AesEncryptCFB(plainText)
-	log.Println("cipherStr:", cipherStr)
-
-	plain := AesDecryptCFB(cipherStr)
-	log.Println("解密结果：", plain)
-}
