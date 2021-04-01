@@ -28,10 +28,10 @@ func main() {
 	ctx := context.Background()
 	client.AddHook(redisHook{})
 
-	err := client.Set(ctx, "key", "value", 0).Err()
-	if err != nil {
-		panic(err)
-	}
+	// err := client.Set(ctx, "key", "value", 0).Err()
+	// if err != nil {
+	// 	panic(err)
+	// }
 
 	val, err := client.Get(ctx, "key").Result()
 	// 检测，查询是否出错
@@ -56,12 +56,19 @@ func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.
 func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
 	// decode
 	fmt.Println("afterProcess is running")
-	// fmt.Println("Name():", cmd.Name())
-	// fmt.Println("FullName():", cmd.FullName())
-	// fmt.Println("Args():", cmd.Args())
-	// fmt.Println("String:", cmd.String())
+	fmt.Println("Name():", cmd.Name())
+	fmt.Println("FullName():", cmd.FullName())
+	fmt.Println("Args():", cmd.Args())
+	fmt.Println("String:", cmd.String())
+	if cmd.Name() == "get" {
+		args := cmd.Args()
+		fmt.Println("args:", args[1])
+	}
 	return nil
 }
+
+
+
 
 var Key = []byte("0123456789ABCDEF")
 
@@ -83,4 +90,20 @@ func aesEncryptCFB(plainText string) (cipherStr string) {
 	stream := cipher.NewCFBEncrypter(block, iv)
 	stream.XORKeyStream(cipherBytes[aes.BlockSize:], plainBytes)
 	return hex.EncodeToString(cipherBytes)
+}
+
+func aesDecryptCFB(cipherStr string) (plainText string) {
+	cipherBytes, _ := hex.DecodeString(cipherStr)
+	block, err := aes.NewCipher(Key)
+	if err != nil {
+		log.Fatal("create instance of encryption error:", err)
+		return
+	}
+
+	iv := cipherBytes[:aes.BlockSize]
+	plainBytes := cipherBytes[aes.BlockSize:]
+
+	stream := cipher.NewCFBDecrypter(block, iv)
+	stream.XORKeyStream(plainBytes, plainBytes)
+	return string(plainBytes)
 }
