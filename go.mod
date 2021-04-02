@@ -9,6 +9,7 @@ require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/go-redis/redis/v8 v8.8.0
 	github.com/golang/mock v1.5.0
+	github.com/google/uuid v1.2.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect

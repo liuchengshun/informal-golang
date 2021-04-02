@@ -65,7 +65,7 @@ func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
 		vals := strings.Split(cmd.String(), ": ")
 		res := aesDecryptCFB(vals[1])
 		fmt.Println("res:", res)
-	
+
 		vals[1] = res
 		str := strings.Join(vals, ": ")
 		fmt.Println("str:", str)
