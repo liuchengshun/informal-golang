@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"log"
 	"io"
@@ -39,13 +40,14 @@ func main() {
 		panic(err)
 	}
 	fmt.Println("key", val)
+
+	// res := aesDecryptCFB(val)
+	// fmt.Println("res:", res)
 }
 
 func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.Context, error) {
-	if cmd.Name() == "set" {
-		fmt.Println("beforeProcess is running")
-		args := cmd.Args()
-		fmt.Println("args[2]:", args[2])
+	args := cmd.Args()
+	if cmd.Name() == "set" && args[1] == "key" {
 		if val, ok := args[2].(string); ok {
 			args[2] = aesEncryptCFB(val)
 		}
@@ -54,15 +56,19 @@ func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.
 }
 
 func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
-	// decode
-	fmt.Println("afterProcess is running")
-	fmt.Println("Name():", cmd.Name())
-	fmt.Println("FullName():", cmd.FullName())
-	fmt.Println("Args():", cmd.Args())
-	fmt.Println("String:", cmd.String())
-	if cmd.Name() == "get" {
-		args := cmd.Args()
-		fmt.Println("args:", args[1])
+	args := cmd.Args()
+	if cmd.Name() == "get" && args[0] == "get" && args[1] == "key" {
+		fmt.Println("cmd.Args():", cmd.Args())
+		fmt.Println("cmd.FullName():", cmd.FullName())
+		fmt.Println("cmd.String():", cmd.String())
+
+		vals := strings.Split(cmd.String(), ": ")
+		res := aesDecryptCFB(vals[1])
+		fmt.Println("res:", res)
+	
+		vals[1] = res
+		str := strings.Join(vals, ": ")
+		fmt.Println("str:", str)
 	}
 	return nil
 }
@@ -94,6 +100,7 @@ func aesEncryptCFB(plainText string) (cipherStr string) {
 
 func aesDecryptCFB(cipherStr string) (plainText string) {
 	cipherBytes, _ := hex.DecodeString(cipherStr)
+	fmt.Println("cipherBytes", cipherBytes)
 	block, err := aes.NewCipher(Key)
 	if err != nil {
 		log.Fatal("create instance of encryption error:", err)
