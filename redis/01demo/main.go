@@ -74,6 +74,9 @@ func main() {
 
 	val, _ = rdb.Get(ctx, id).Result()
 	fmt.Println("person0:", val)
+
+	val, _ = rdb.Get(ctx, "4455ff4d-6675-4f7e-bc76-c88525c83386").Result()
+	fmt.Println("val:", val)
 }
 
 func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.Context, error) {
@@ -115,7 +118,7 @@ func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
 			if err == nil && args[0] == "set" {
 				user := &auth{}
 				if v, ok := args[2].([]byte); ok {
-					if err := json.Unmarshal([]byte(v), &user); err != nil {
+					if err := json.Unmarshal(v, &user); err != nil {
 						return err
 					}
 				}
