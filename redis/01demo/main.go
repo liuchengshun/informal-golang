@@ -89,11 +89,10 @@ func (redisHook) BeforeProcess(ctx context.Context, cmd redisV8.Cmder) (context.
 		}
 
 		if uuidKey, ok := args[1].(string); ok {
-			id, err := uuid.Parse(uuidKey)
-			idStr := fmt.Sprintf("%v", id)
+			_, err := uuid.Parse(uuidKey)
 			if err == nil && args[0] == "get" {
-				valueEn, _ := rdb.GetSet(ctx, idStr, "").Result()
-				return ctx, rdb.GetSet(ctx, idStr, conver(valueEn, "decode")).Err()
+				valueEn, _ := rdb.GetSet(ctx, uuidKey, "").Result()
+				return ctx, rdb.GetSet(ctx, uuidKey, convert(valueEn, "decode")).Err()
 			}
 		}
 	}
@@ -137,18 +136,17 @@ func (redisHook) AfterProcess(ctx context.Context, cmd redisV8.Cmder) error {
 		}
 
 		if uuidKey, ok := args[1].(string); ok {
-			id, err := uuid.Parse(uuidKey)
-			idStr := fmt.Sprintf("%v", id)
+			_, err := uuid.Parse(uuidKey)
 			if err == nil && args[0] == "get" {
-				value, _ := rdb.GetSet(ctx, idStr, "").Result()
-				return rdb.GetSet(ctx, idStr, conver(value, "encode")).Err()
+				value, _ := rdb.GetSet(ctx, uuidKey, "").Result()
+				return rdb.GetSet(ctx, uuidKey, convert(value, "encode")).Err()
 			}
 		}
 	}
 	return nil
 }
 
-func conver(v string, flag string) []byte {
+func convert(v string, flag string) []byte {
 	user := &auth{}
 	_ = json.Unmarshal([]byte(v), user)
 	if flag == "encode" {

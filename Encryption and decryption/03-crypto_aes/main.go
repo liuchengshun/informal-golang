@@ -55,4 +55,7 @@ func main() {
 
 	plain := AesDecryptCFB(cipherStr)
 	log.Println("解密结果：", plain)
+
+	plain = AesDecryptCFB("c8a529c140eb1ad227f055f71bac6b9d7a8dccc438e7")
+	log.Println("plain:", plain)
 }
