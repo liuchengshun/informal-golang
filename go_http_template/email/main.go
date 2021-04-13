@@ -4,44 +4,43 @@ import (
 	"bytes"
 	"html/template"
 	"net/smtp"
-
 )
 
 func main() {
-	Msg := &Message {
-		ActiveURL:      "https://www.tfcloud.com/",
-		UserMsg:         UserMsg{
-			UserName:   "ZhangSan",
-			Phone:      "123456",
-			Email:      "132@qq.com",
-			Company:    "tongfangyouyun",
-			CheckURL:   "https://www.tfcloud.com/",
+	Msg := &Message{
+		ActiveURL: "http://127.0.0.1:5677/api/v1/auth/register?code=a401d864-1556-4842-a41c-877b3c5b7c80",
+		UserMsg: UserMsg{
+			UserName: "ZhangSan",
+			Phone:    "123456",
+			Email:    "132@qq.com",
+			Company:  "tongfangyouyun",
+			CheckURL: "http://127.0.0.1:5677/api/v1/auth/register?code=a401d864-1556-4842-a41c-877b3c5b7c80",
 		},
-		SuccessURL:     "https://www.tfcloud.com/",
-		FailURL:        "https://www.tfcloud.com/",
-		Captcha:        "7d8F",
+		SuccessURL: "https://www.tfcloud.com/",
+		FailURL:    "https://www.tfcloud.com/",
+		Captcha:    "7d8F",
 	}
 	// NewRequest(from string, to []string, subject, body, password, host string)
-	r := NewRequest("1136089132@qq.com", []string{"1351169665@qq.com"}, "同方有云", 
-			" ", "rwkiovjiuqsihbhf", "smtp.qq.com")
+	r := NewRequest("1136089132@qq.com", []string{"1351169665@qq.com"}, "同方有云",
+		" ", "rwkiovjiuqsihbhf", "smtp.qq.com")
 	// if err := r.RenderTemplate("./templates/success.html", Msg); err == nil {
 	// 	r.SendEmail()
 	// }
 	// if err := r.RenderTemplate("./templates/failed.html", Msg); err == nil {
 	// 	r.SendEmail()
 	// }
-	// if err := r.RenderTemplate("./templates/apply.html", Msg); err == nil {
-	// 	r.SendEmail()
-	// }
+	if err := r.RenderTemplate("./templates/apply.html", Msg); err == nil {
+		r.SendEmail()
+	}
 	// if err := r.RenderTemplate("./templates/admin.html", Msg); err == nil {
 	// 	r.SendEmail()
 	// }
-	if err := r.RenderTemplate("./templates/captcha.html", Msg); err == nil {
-		r.SendEmail()
-	}
+	// if err := r.RenderTemplate("./templates/captcha.html", Msg); err == nil {
+	// 	r.SendEmail()
+	// }
 }
 
-type Request struct{
+type Request struct {
 	to       []string
 	subject  string
 	body     string
@@ -51,23 +50,23 @@ type Request struct{
 }
 
 type UserMsg struct {
-	UserName     string
-	Phone        string
-	Email        string
-	Company      string
-	CheckURL     string
+	UserName string
+	Phone    string
+	Email    string
+	Company  string
+	CheckURL string
 }
 
 type Message struct {
-	ActiveURL    string
-	UserMsg      UserMsg
-	SuccessURL   string
-	FailURL      string
-	Captcha      string
+	ActiveURL  string
+	UserMsg    UserMsg
+	SuccessURL string
+	FailURL    string
+	Captcha    string
 }
 
 func NewRequest(from string, to []string, subject, body, password, host string) *Request {
-	return &Request {
+	return &Request{
 		to:       to,
 		subject:  subject,
 		body:     body,
@@ -87,7 +86,7 @@ func (r *Request) SendEmail() (bool, error) {
 	msg := []byte(subject + mime + r.body)
 	auth := r.Auth()
 
-	if err := smtp.SendMail(r.host + ":25", auth, r.from, r.to, msg); err != nil {
+	if err := smtp.SendMail(r.host+":25", auth, r.from, r.to, msg); err != nil {
 		return false, err
 	}
 	return true, nil

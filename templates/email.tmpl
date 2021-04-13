@@ -1,0 +1,150 @@
+{{define "header"}}
+<div style="height: 100px; border: 1px solid; border-radius: 5px 5px 0 0; background-color: #09162d; background-image: url({{.Logo}}); background-size: 200px 60px; background-repeat: no-repeat; background-position: center;"></div>
+{{end}}
+
+{{define "footer"}}
+<div style="width: 550px; margin: 60px auto 0">
+	<p style="text-align: right">
+    		{{.Company}}
+  	</p>
+	<div style="font-size: small; opacity: 0.5; padding: 20px 0; margin-top: 30px; border-top: 1px solid darkgray;">
+    		本邮件由 XDAP 系统自动发出，请勿直接回复。
+	</div>
+</div>
+{{end}}
+
+{{define "captcha"}}
+<div style="width: 650px; background-color: rgb(248, 247, 245); margin: 0 auto; border: 1px solid; border-radius: 5px;">
+	{{template "header" .}}
+  	<div style="width: 550px; margin: 0 auto">
+    		<h2 style="margin: 0; padding-top: 30px">
+			尊敬的用户，您好！
+		</h2>
+		<p>
+			您收到的验证码如下（<span style="font-weight: bold">请勿将此验证码转发或提供给任何人。</span>）
+		</p>
+		<p style="font-family: Arial, Helvetica, sans-serif; font-size: 4em; text-align: center; font-weight: bold; margin-top: 20px;">
+			{{.Data.Code}}
+		</p>
+	</div>
+	{{template "footer" .}}
+</div>
+{{end}}
+
+{{define "register-verify"}}
+<div style="width: 650px; background-color: rgb(248, 247, 245); margin: 0 auto; border: 1px solid; border-radius: 5px;">
+	{{template "header" .}}
+	<div style="width: 550px; margin: 0 auto">
+		<h2 style="padding-top: 30px; margin-top: 0">
+			尊敬的用户，您好！
+		</h2>
+		<p style="margin-bottom: 0px">
+			您的邮箱正在注册平台账号，如是您操作的，请点击以下链接激活账户。
+		</p>
+		<a href="{{.Data.VerifyURL}}" style="word-wrap: break-word; text-decoration: none; color: #1584ed">
+ 			{{.Data.VerifyURL}}
+		</a>
+		<p style="margin-top: 25px">
+			如果以上链接无法打开，请把上面网页地址复制到浏览器地址栏中打开（该链接在24小时内有效）
+		</p>
+	</div>
+	{{template "footer" .}}
+</div>
+{{end}}
+
+{{define "register-review"}}
+<div style="width: 650px; background-color: rgb(248, 247, 245); margin: 0 auto; border: 1px solid; border-radius: 5px;">
+	{{template "header" .}}
+	<div style="width: 550px; margin: 0 auto">
+		<h2 style="margin: 0; padding-top: 30px">
+			尊敬的管理员用户，您好！
+		</h2>
+		<p>
+  			您最新收到如下的注册申请，请您及时认真审核并登录平台予以确认。感谢您的配合。
+		</p>
+		<table style="margin: 30px 0">
+  			<tr>
+    				<th style="font-size: 17px; width: 60px; text-align: justify; text-align-last: justify;">
+     					 用户名
+    				</th>
+    				<td style="font-size: medium">
+      					：{{.Data.Name}}
+    				</td>
+  			</tr>
+  			<tr>
+    				<th style="font-size: 17px; width: 60px; text-align: justify; text-align-last: justify;">
+      					电话
+    				</th>
+    				<td style="font-size: medium">
+      					：{{.Data.Phone}}
+    				</td>
+  			</tr>
+  			<tr>
+    				<th style="font-size: 17px; width: 60px; text-align: justify; text-align-last: justify;">
+      					邮箱
+    				</th>
+    				<td style="font-size: medium">
+      					：{{.Data.Email}}
+    				</td>
+  			</tr>
+  			<tr>
+    				<th style="font-size: 17px; width: 60px; text-align: justify; text-align-last: justify;">
+      					公司
+    				</th>
+    				<td style="font-size: medium">
+      					：{{.Data.Company}}
+    				</td>
+  			</tr>
+		</table>
+		<a href="{{.Data.ReviewURL}}" style="word-wrap: break-word; text-decoration: none; color: #1584ed">
+  			{{.Data.ReviewURL}}
+		</a>
+		<p style="margin-top: 25px">
+ 	 		如果以上链接无法打开，请把上面网页地址复制到浏览器地址栏中打开（该链接在24小时内有效）
+		</p>
+	</div>
+	{{template "footer" .}}
+</div>
+{{end}}
+
+{{define "register-ok"}}
+<div style="width: 650px; background-color: rgb(248, 247, 245); margin: 0 auto; border: 1px solid; border-radius: 5px;">
+	{{template "header" .}}
+  	<div style="width: 550px; margin: 0 auto">
+		<h2 style="margin: 0; padding-top: 30px">
+  			尊敬的用户，您好！
+		</h2>
+		<p>
+  			恭喜您，您的注册申请已通过管理员的审批验证并成功！即刻起，您可以使用您注册时预留的信息登录平台，感谢您的注册使用。
+		</p>
+		<p style="font-size: 1.5em; text-align: center; font-weight: bold; margin: 50px 0;">
+  			注册成功！
+		</p>
+		<a href="{{.Data.LoginURL}}" style="display: block; width: 150px; padding: 10px 32px; margin: 0 auto; text-decoration: none; text-align: center; color: white; background-color: rgb(233, 4, 4);">
+  			立即登录
+		</a>
+  	</div>
+	{{template "footer" .}}
+</div>
+{{end}}
+
+{{define "register-failed"}}
+<div style="width: 650px; background-color: rgb(248, 247, 245); margin: 0 auto; border: 1px solid; border-radius: 5px;">
+	{{template "header" .}}
+  	<div style="width: 550px; margin: 0 auto">
+		<h2 style="margin: 0; padding-top: 30px">
+  			尊敬的用户，您好！
+		</h2>
+		<p>
+  			很遗憾，您的注册信息未能通过管理员的审批，感谢您的支持。
+		</p>
+		<p style="font-size: 1.5em; text-align: center; font-weight: bold; margin: 50px 0;">
+  			注册失败！
+		</p>
+		<a href="{{.Data.RegisterURL}}" style="display: block; width: 150px; padding: 10px 32px; text-decoration: none; margin: 0 auto; text-align: center; background-color: rgb(233, 4, 4); color: white;">
+  			返回注册
+		</a>
+  	</div>
+	{{template "footer" .}}
+</div>
+{{end}}
