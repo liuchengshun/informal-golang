@@ -13,34 +13,16 @@ Razor支持YAML 和 JSON 两种的配置文件，暂时不支持默认配置，�
 参数示例
 """"""""""""
 
-**YAML 格式：**
-
-server:
-    host: 127.0.0.1
-    port: 8080
-
-database:
-    host: ued.hex2dec.com
-    port: 3306
-    username: razor
-    password: razor
-    db: razor_lcs
-
-**JSON 格式：**
-
-{
-"server": {
-    "host": "127.0.0.1",
-    "port": "8080"
-},
-"database": {
-    "host": "ued.hex2dec.com",
-    "port": "3306",
-    "username": "razor",
-    "password": "razor",
-    "db": "razor_lcs"
-    }
-}
+:server:
+    - host: 127.0.0.1
+    - port: 8080
+  
+:database:
+    - host: ued.hex2dec.com
+    - post: 3306
+    - username: razor
+    - password: razor
+    - db: razor_lcs
 
 参数描述
 """"""""""""
