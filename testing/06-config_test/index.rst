@@ -16,7 +16,7 @@ Razor支持YAML 和 JSON 两种的配置文件，暂时不支持默认配置，�
 :server:
     - host: 127.0.0.1
     - port: 8080
-  
+
 :database:
     - host: ued.hex2dec.com
     - post: 3306
