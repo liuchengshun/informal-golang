@@ -1,0 +1,10 @@
+前端配置（ui）
+""""""""""""""""
+
+.. rest_method:: GET /api/v1/ui/settings
+
+.. rest_parameters:: parameters.yaml
+
+.. rest_parameters:: parameters.yaml
+
+    - 

@@ -21,8 +21,8 @@ Login authenticate
 .. rest_parameters:: parameters.yaml
 
     - user: user
-     - userid: userid
-     - username: username
+    - userid: userid
+    - username: username
 
 .. rest_status_code:: success status.yaml
 
