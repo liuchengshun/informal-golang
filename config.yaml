@@ -1,61 +1,6 @@
 server:
-  host: 0.0.0.0
+  host: 127.0.0.1
   port: 5677
 
-log:
-  debug: true
-
-auth:
-  auth_url: http://127.0.0.1:5000
-  admin_username: ryze
-  admin_password: ryze
-  admin_project: service
-
 redis:
-  url: redis://127.0.0.1:6379
-
-database:
-  host: 127.0.0.1
-  port: 3306
-  username: ryze
-  password: ryze
-  db: ryze
-
-nuntius:
-  url: http://127.0.0.1:9096
-  sms:
-    receiver: sms
-    template: ./templates/sms.tmpl
-  email:
-    receiver: email
-    template: ./templates/email.tmpl
-
-register:
-  auth_accept: false
-  admin_email: contact@unitedstack.com
-
-ui:
-  header:
-    logo: http://10.0.220.11/static/assets/nav_logo.png
-  auth:
-    logo: http://10.0.220.11/static/assets/login/logo@2x.png
-  copyright:
-    name: 同方有云（北京）科技有限公司
-  about:
-    company_name: 同方有云（北京）科技有限公司
-    company_address: 北京市海定区王庄路1号清华同方科技大厦D座6层
-    phone: 400-898-5401
-    email: contact@unitedstack.com
-    logo: http://10.0.220.11/static/assets/login/logo@2x.png
-  docs:
-    user_guide: https://www.kdocs.cn/p/106186321588
-    admin_guide: https://www.kdocs.cn/p/106041363958
-
-license:
-  device_id: 467edafc-1613-45a3-a4f7-0dfc54d378b9
-
-alipay:
-  is_prod: true
-  app_id: ""
-  app_private_key: ""
-  alipay_public_key: ""
+  url: 127.0.0.1:5676
