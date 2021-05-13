@@ -24,6 +24,7 @@ require (
 	golang.org/x/net v0.0.0-20210316092652-d523dce5a7f4
 	golang.org/x/tools v0.0.0-20201224043029-2b0845dc783e
 	gopkg.in/telegram-bot-api.v4 v4.6.4
+	gorm.io/driver/mysql v1.0.6
 	gorm.io/driver/postgres v1.0.8
-	gorm.io/gorm v1.21.7
+	gorm.io/gorm v1.21.9
 )
