@@ -19,7 +19,9 @@ require (
 	github.com/golang/mock v1.5.0
 	github.com/google/uuid v1.2.0
 	github.com/google/wire v0.5.0
+	github.com/gophercloud/gophercloud v0.17.0
 	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/sessions v1.2.1
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/kataras/iris v0.0.2 // indirect
@@ -27,7 +29,9 @@ require (
 	github.com/labstack/echo/v4 v4.3.0
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/nsqio/go-nsq v1.0.8 // indirect
+	github.com/prashantv/gostub v1.0.0
 	github.com/prometheus/common v0.10.0 // indirect
+	github.com/rbcervilla/redisstore/v8 v8.0.0
 	github.com/smartystreets/goconvey v1.6.4
 	github.com/spf13/viper v1.7.1
 	github.com/streadway/amqp v1.0.0
