@@ -11,6 +11,7 @@ require (
 	github.com/astaxie/beego v1.12.3 // indirect
 	github.com/beego/beego/v2 v2.0.1
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
+	github.com/gin-gonic/gin v1.7.2
 	github.com/go-playground/validator/v10 v10.4.1
 	github.com/go-redis/redis v6.15.9+incompatible // indirect
 	github.com/go-redis/redis/v8 v8.8.2
