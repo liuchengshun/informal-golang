@@ -10,6 +10,7 @@ require (
 	github.com/agiledragon/gomonkey v2.0.2+incompatible
 	github.com/astaxie/beego v1.12.3 // indirect
 	github.com/beego/beego/v2 v2.0.1
+	github.com/eapache/go-resiliency v1.2.0
 	github.com/fasthttp-contrib/websocket v0.0.0-20160511215533-1f3b11f56072 // indirect
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-playground/validator/v10 v10.4.1
@@ -28,6 +29,7 @@ require (
 	github.com/kataras/iris v0.0.2 // indirect
 	github.com/kataras/iris/v12 v12.1.8
 	github.com/labstack/echo/v4 v4.3.0
+	github.com/labstack/gommon v0.3.0
 	github.com/moul/http2curl v1.0.0 // indirect
 	github.com/nsqio/go-nsq v1.0.8 // indirect
 	github.com/prashantv/gostub v1.0.0
